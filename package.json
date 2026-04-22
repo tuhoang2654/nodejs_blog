@@ -19,17 +19,22 @@
   "type": "commonjs",
   "main": "src/index.js",
   "scripts": {
+    "beautiful": "prettier --single-quote --trailing-comma all --write 'src/**/*.{js,json,scss}'",
     "start": "nodemon --inspect src/index.js",
     "watch": "node-sass -w src/resources/scss/ --output src/public/css/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "express": "^5.2.1",
-    "express-handlebars": "^8.0.7"
+    "express-handlebars": "^8.0.7",
+    "mongoose": "^9.4.1"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "morgan": "^1.10.1",
     "node-sass": "^9.0.0",
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3"
   }
 }
