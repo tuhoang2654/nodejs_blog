@@ -4,10 +4,12 @@ const { mongooseToObject } = require('../../util/mongoose')
 class CourseController {
   show(req, res, next) {
     Course.findOne({ slug: req.params.slug })
-    .then(course => 
-      res.render('courses/show', { course: mongooseToObject(course) })
-    )
-    .catch(next);
+      .then(course => {
+        if (!course) return res.status(404).send('Course not found')
+        res.render('courses/show', {
+          course: mongooseToObject(course)
+        })
+      })
   }
 
   // [GET] /courses/create
@@ -18,27 +20,35 @@ class CourseController {
   // [GET] /courses/:id/edit
   edit(req, res, next) {
     Course.findById(req.params.id)
-    .then(course => res.render('courses/edit', {
-      course: mongooseToObject(course)
-    }))
-    .catch(next)
+      .then(course => {
+        if (!course) return res.status(404).send('Course not found')
+        res.render('courses/edit', {
+          course: mongooseToObject(course)
+        })
+      })
   }
 
   // [POST] /courses/store
   store(req, res, next) {
     const formData = req.body
-    req.body.image = req.body.image
     const course = new Course(formData)
     course.save()
-    .then(() => res.redirect(`/home`))
-    .catch()
+      .then(() => res.redirect(`/home`))
+      .catch(next)
   }
 
   // [PUT] /courses/:id
   update(req, res, next) {
-    Course.updateOne({ _id: req.params.id }, req.body)
-    .then(() => res.redirect('/me/stored/courses'))
-    .catch(next)
+    Course.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      .then(() => res.redirect('/me/stored/courses'))
+      .catch(next)
+  }
+
+  // [DELETE] /courses/:id
+  delete(req, res, next) {
+    Course.deleteOne({ _id: req.params.id })
+      .then(() => res.redirect('/me/stored/courses'))
+      .catch(next)
   }
 }
 
