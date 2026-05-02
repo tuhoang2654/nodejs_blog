@@ -33,7 +33,7 @@ class CourseController {
     const formData = req.body
     const course = new Course(formData)
     course.save()
-      .then(() => res.redirect(`/home`))
+      .then(() => res.redirect('/me/stored/courses'))
       .catch(next)
   }
 
