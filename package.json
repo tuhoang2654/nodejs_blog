@@ -28,7 +28,8 @@
     "express": "^5.2.1",
     "express-handlebars": "^8.0.7",
     "mongoose": "^9.4.1",
-    "mongoose-slug-generator": "^1.0.4"
+    "mongoose-delete": "^1.0.7",
+    "speakingurl": "^14.0.1"
   },
   "devDependencies": {
     "husky": "^9.1.7",
