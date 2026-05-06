@@ -24,7 +24,7 @@ const Course = new Schema(
 Course.plugin(mongooseDelete, {
   deletedAt: true,
   overrideMethods: 'all',
-})
+});
 
 // mongoose-slug-generator dùng .exec(callback) — không tương thích Mongoose 7+
 Course.pre('save', async function () {

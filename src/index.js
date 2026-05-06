@@ -32,7 +32,7 @@ app.use(morgan('combined'));
 
 //template engine
 app.engine(
-  'handlebars', 
+  'handlebars',
   handlebars.engine({
     helpers: {
       sum: (a, b) => a + b,
@@ -40,7 +40,7 @@ app.engine(
       mul: (a, b) => a * b,
       div: (a, b) => a / b,
     },
-  })
+  }),
 );
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'resources', 'views'));
