@@ -25,6 +25,20 @@ app.use(express.json());
 
 app.use(methodOverride('_method'));
 
+app.get('/middleware', 
+  function (req, res, next) {
+    if(['vethuong','vevip'].includes(req.query.ve)) {
+      return next()
+    }
+    res.status(403).json({ 
+      message: "access denied"
+    })
+  },
+  function (req, res, next) {
+  res.json({
+    message: 'Successfully',
+  });
+});
 //XMLHttpRequest, fetch, axios
 
 //HTTP logger

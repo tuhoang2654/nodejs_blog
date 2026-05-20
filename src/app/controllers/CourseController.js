@@ -66,7 +66,7 @@ class CourseController {
 
   // [POST] /courses/handle-form-actions
   handleFormActions(req, res, next) {
-    switch(req.body.action) {
+    switch (req.body.action) {
       case 'delete':
         Course.delete({ _id: { $in: req.body.courseIds } })
           .then(() => res.redirect('/me/stored/courses'))
